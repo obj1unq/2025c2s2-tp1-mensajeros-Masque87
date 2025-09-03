@@ -1,0 +1,49 @@
+import example.*
+
+    describe "PruebasDeMensajeria" {
+        test "NoPagóLucas y NeoNoPuedeLlevarloALaMatrix" {
+            assert.that(paqueteDeLucas.estaPago())
+
+            paqueteDeLucas.cambiarEstadoDelPago(false) 
+            assert.notThat(paqueteDeLucas.estaPago())
+
+            neo.cambiarCredito(false)
+            assert.notThat(neo.puedeLlamar())
+
+            assert.notThat(mensajeria.puedeSerEntregadoPorA(paqueteDeLucas, neo, laMatrix))
+
+        }
+
+        test "SiPagóLucas y JeanLoLlevaALaMatrix"{
+            assert.that(paqueteDeLucas.estaPago())
+
+            assert.that(mensajeria.puedeSerEntregadoPorA(paqueteDeLucas, neo, laMatrix))
+        }
+
+
+        test "SiPagóLucas y SaraNoLoPuedeLLevarABrooklyn" {
+            assert.that(paqueteDeLucas.estaPago())
+            
+            sara.pesoPropio(70)
+            camion.cambiarCantidadDeAcoplados(1)
+            sara.cambiarVehículo(camion)
+            assert.equals(1070, sara.peso())
+
+            assert.notThat(mensajeria.puedeSerEntregadoPorA(paqueteDeLucas, sara, brooklyn))
+        }
+
+
+
+        test "SiPagóLucas y SaraLoLlevaABrooklyn"{
+            assert.that(paqueteDeLucas.estaPago())
+            
+            sara.pesoPropio(70)
+            assert.equals(moto, sara.vehiculo())
+            
+            assert.that(mensajeria.puedeSerEntregadoPorA(paqueteDeLucas, sara, brooklyn))
+        }
+
+
+    }
+
+
